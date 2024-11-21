@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WORKDIR="project"
-REPO_URL="https://github.com/MariaCutipa/ProyectoFinal.git"
+REPO_URL="https://github.com/JRodrigoHC19/api-models.git"
 
 git clone $REPO_URL $WORKDIR
 
