@@ -1,0 +1,74 @@
+<div class="main-container">
+    <!-- Contenedor izquierdo (60%) -->
+    <div class="left-container">
+        <!-- Card 1 -->
+        <div *ngFor="let entregable of proyectoData?.entregables">
+            <div class="card card-1">
+                <div class="dates">
+                    <h3>{{ entregable.nombre }}</h3>
+                    <button class="details-button" (click)="onSelectEntregable(entregable)">Detalles</button>
+                </div>
+                <hr class="separator">
+                <div class="dates">
+                    <p><span class="bold">Fecha Inicio:</span> {{ entregable.fechaInicio }}</p>
+                    <p><span class="bold">Fecha Fin:</span> {{ entregable.fechaFin }}</p>
+                    <p><span class="bold">Estado:</span> {{ entregable.estado }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor derecho (30%) -->
+    <div class="right-container">
+        <!-- Card de detalles -->
+        <div class="card card-3" *ngIf="selectedEntregable">
+            <h3>{{ selectedEntregable.nombre }}</h3>
+            <hr class="separatorA">
+            <div class="tasks">
+                <div class="task-item" *ngFor="let tarea of selectedEntregable.tareas">
+                    <div class="task-icon">{{ selectedEntregable.tareas.indexOf(tarea) + 1 }}</div>
+                    <div class="task-content">
+                        <p class="task-title">{{ tarea.nombre }}</p>
+                        <p class="task-description">{{ tarea.descripcion }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-button-container">
+                <button class="upload-button" (click)="openCreateUserModal()">Subir archivo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="showCreateUserModal" class="modal">
+    <div class="modal-content">
+      <!-- Título y botón Importar en la misma línea -->
+      <div class="modal-header">
+        <h3>Subir Archivo</h3>
+        <div class="file-container">
+            <input
+            type="file"
+            id="fileInput"
+            #fileInput
+            (change)="onFileSelect($event)"
+            accept=".pdf"
+            style="display: none;"
+          />
+          <button type="button" class="btn-importar" (click)="fileInput.click()">Seleccionar Archivo</button>
+        </div>
+      </div>
+  
+      <form>
+        <p><strong>Entregable:</strong> {{ selectedEntregable?.nombre }}</p>
+        <p><strong>Archivo seleccionado:</strong> {{ selectedFileName || 'Ninguno' }}</p>
+  
+        <!-- Contenedor de botones al final del formulario -->
+        <div class="modal-footer">
+          <button type="button" class="btn-guardar" [disabled]="!selectedFile" (click)="uploadFile()">Guardar</button>
+          <button type="button" class="btn-cancelar" (click)="closeCreateUserModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

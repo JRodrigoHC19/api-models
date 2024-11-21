@@ -1,0 +1,20 @@
+<div class="dashboard-cards">
+  <div class="card" *ngFor="let proyecto of proyectos">
+    <h3>{{ proyecto.nombre }}</h3>
+    <p>{{ proyecto.descripcion }}</p>
+    <div class="card-buttons">
+      <!-- Enlace -->
+      <button (click)="goToLink(proyecto.enlace)" class="btn">
+        <i class="fas fa-link"></i>
+      </button>
+      <!-- Ver detalles -->
+      <button (click)="goToDetails(proyecto.detalles)" class="btn">
+        <i class="fas fa-book"></i>
+      </button>
+      <!-- Entregables (condicional) -->
+      <button (click)="goToEntregables(proyecto.entregables)" class="btn">
+        <i class="fas fa-folder"></i>
+      </button>
+    </div>
+  </div>
+</div>

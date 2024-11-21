@@ -1,0 +1,53 @@
+<div class="main-container">
+  <!-- Contenedor izquierdo (60%) -->
+  <div class="left-container">
+    <!-- Card 1 -->
+    <div class="card card-1">
+      <h3>Datos Generales</h3>
+      <hr class="separator">
+      <p><span class="bold">Descripción:</span> {{ proyectoData?.descripcion }}</p>
+      <p><span class="bold">Fecha Inicio:</span> {{ proyectoData?.fechaInicio }}</p>
+      <p><span class="bold">Fecha Fin:</span> {{ proyectoData?.fechaFin }}</p>
+      <p><span class="bold">Estado:</span> {{ proyectoData?.estado }}</p>
+      <p><span class="bold">Usuario Creación:</span> {{ proyectoData?.usuarioCreacion }}</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card card-2">
+      <h3>Estadísticas</h3>
+      <hr class="separator">
+      <div class="card-content">
+        <div class="column">
+          <h4>Avance</h4>
+          <p>{{ proyectoData?.avance }}%</p>
+        </div>
+        <div class="column">
+          <h4>Entregables</h4>
+          <p>{{ proyectoData?.entregables }}</p>
+        </div>
+        <div class="column">
+          <h4>Tareas</h4>
+          <p>{{ proyectoData?.tareas }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor derecho (30%) -->
+  <div class="right-container">
+    <!-- Card 3 -->
+    <div class="card card-3">
+      <h3>Etapas</h3>
+      <hr class="separator">
+      <div class="timeline">
+        <div *ngFor="let etapa of proyectoData?.etapas" class="timeline-item">
+          <div class="circle" [class.active]="etapa.activo"></div>
+          <div class="timeline-content">
+            <p><span class="bold">{{ etapa.nombre }}</span><small> del {{ etapa.fechaInicio }} al {{ etapa.fechaFin }}</small></p>
+            <p>{{ etapa.tareas }} tareas, entregables</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

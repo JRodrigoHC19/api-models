@@ -1,0 +1,146 @@
+/* Contenedor principal con dos secciones (60%-30%) */
+.main-container {
+  display: grid;
+  grid-template-columns: 65% 32%;
+  gap: 30px;
+  padding: 0px 20px;
+}
+
+/* Contenedor izquierdo */
+.left-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Contenedor derecho */
+.right-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo general de las tarjetas */
+.card {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  text-align: left;
+  padding-bottom: 13px;
+}
+
+/* Separador debajo del título */
+.separator {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin-bottom: 25px;
+}
+
+/* Tarjeta 2 con columnas internas */
+.card-2 .card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.card-2 .column {
+  text-align: center;
+}
+
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+
+  .left-container, .right-container {
+    grid-column: span 1;
+  }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3{
+  margin: 10px 0 10px;
+  font-size: 1.4rem;
+  color: #2c3e50;
+  font-weight:500;
+}
+
+.card h4 {
+  margin: 10px 0 10px;
+  font-size: 1.2rem;
+  color: #2c3e50;
+  font-weight:400;
+}
+
+.card p {
+  margin: 15px 0px;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.bold {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.card-2 p {
+  font-size:25px;
+}
+
+.card-3 .timeline {
+  position: relative;
+  margin: 10px 10px;
+}
+
+.card-3 .timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 14px; /* Centrar la línea con los círculos */
+  width: 2px; /* Grosor de la línea */
+  height: 100%;
+  background-color: #e6e3e3; /* Color de la línea */
+  z-index: 0; /* Detrás de los círculos */
+}
+
+.card-3 .timeline-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  position: relative; /* Necesario para z-index */
+}
+
+.card-3 .circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 3px solid #e6e3e3;
+  flex-shrink: 0;
+}
+
+.card-3 .circle.active {
+  background-color: #3498db;
+}
+
+.card-3 .timeline-content {
+  margin-left: 5px;
+}
+
+.card-3 .timeline-content p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.card-3 .timeline-content small {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}

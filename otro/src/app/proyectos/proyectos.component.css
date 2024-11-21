@@ -1,0 +1,58 @@
+  /* Tarjetas del dashboard */
+  .dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    text-align: center;
+    padding-bottom: 13px;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card h3 {
+    margin: 10px 0 10px;
+    font-size: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  .card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #7f8c8d;
+  }
+  
+  /* Iconos dentro de las tarjetas */
+  .card i {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  .card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 10px 0px 10px;
+  }
+  
+  .card .btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 16px;
+  }
+  
+  .card .btn:hover {
+    color: #0056b3;
+  }
+  
