@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>{{ producto.nombre }}</h1><br>
+<h2>Categoria : {{producto.categoria}}</h2>
+<h2>Precio : {{ producto.precio }}</h2>
+<h2>Stock : {{ producto.stock }}</h2><br><br>
+<h4>Publicado en : {{ producto.pub_date }}</h4><br>
+
+{% endblock %}
+
+{% block categorias %}
+  {% for cat in categorias  %}
+    <a href="/categoria/{{ cat.nombre }}/" class="list-group-item" >{{ cat.nombre }}</a>
+  {% endfor %}
+{% endblock %}
