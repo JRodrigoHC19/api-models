@@ -1,0 +1,35 @@
+services:
+  # FAST-API
+  python-app:
+    container_name: srv-api-fast
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db-mongo
+    environment:
+      - MONGO_URI=mongodb://root:admin@db-mongo:27017
+    networks:
+      - back-tier
+
+  # MONGO-DB
+  db-mongo:
+    image: mongo:latest
+    container_name: db-mongo
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    networks:
+      - back-tier
+    ports:
+      - "27017:27017"
+
+
+networks:
+  back-tier:
+
+volumes:
+  mongo-data:
