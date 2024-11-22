@@ -2,11 +2,12 @@ const redis = require('redis');
 const mongoose = require('mongoose');
 const axios = require('axios'); 
 const Entregable = require('../models/entregable');  // Asegúrate de tener el modelo correctamente importado
-require('dotenv').config({ path: '../.env' });  // Si el archivo está en el directorio raíz  // Asegúrate de que esto esté al principio
+require('dotenv').config();  // Si el archivo está en el directorio raíz  // Asegúrate de que esto esté al principio
 console.log('REDIS_HOST:', process.env.REDIS_HOST);  // Verifica que la variable esté correctamente cargada
 console.log('REDIS_PORT:', process.env.REDIS_PORT);  // Verifica que la variable esté correctamente cargada
 console.log('MONGODB_URI:', process.env.MONGODB_URI); 
 console.log('API_ENDPOINT:', process.env.API_ENDPOINT);
+
 
 // Configurar Redis
 const redisClient = redis.createClient({
