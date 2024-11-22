@@ -6,8 +6,6 @@ services:
       context: ./api-fast
     ports:
       - "5000:5000"
-    depends_on:
-      - db-mongo
     environment:
       - MONGO_URI=mongodb://root:admin@34.227.7.159:27017
     networks:
