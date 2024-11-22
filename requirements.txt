@@ -4,6 +4,7 @@ python-dotenv
 asyncpg
 python-multipart
 PyPDF2
+requests
 
 scikit-learn
 pymongo

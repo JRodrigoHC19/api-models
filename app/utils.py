@@ -3,6 +3,8 @@ from PyPDF2 import PdfReader
 import spacy
 import pickle
 import os
+import requests
+from io import BytesIO
 
 def abs_url(dir, ruta):
     return os.path.join(dir, ruta)
@@ -72,3 +74,34 @@ def guardar_habilidades(usuario_id, nombre, email, habilidades, coleccion):
     coleccion.replace_one({"_id": usuario_id}, usuario, upsert=True)
 
     return usuario
+
+
+# Clasificar texto desde una URL
+def classify_pdf_from_url(pdf_url, pkl_model, pkl_vectorizer, pkl_categories):
+    # Descargar el archivo desde la URL
+    response = requests.get(pdf_url)
+    if response.status_code != 200:
+        raise RuntimeError(f"No se pudo descargar el archivo desde la URL: {pdf_url}")
+    
+    # Cargar el archivo en memoria usando BytesIO
+    pdf_file = BytesIO(response.content)
+    
+    # Leer el PDF usando PyPDF2
+    pdf_reader = PdfReader(pdf_file)
+    full_text = ""
+    for page in pdf_reader.pages:
+        full_text += page.extract_text()
+
+    # Preprocesar todo el texto del PDF
+    preprocessed_text = preprocess_text(full_text)
+
+    # Vectorizar el texto preprocesado
+    vectorized_text = pkl_vectorizer.transform([preprocessed_text])
+
+    # Hacer predicción
+    predictions = pkl_model.predict(vectorized_text)
+
+    # Identificar categorías detectadas
+    habilidades_detectadas = [pkl_categories[i] for i, val in enumerate(predictions[0]) if val > 0]
+
+    return habilidades_detectadas
