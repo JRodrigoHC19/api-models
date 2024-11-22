@@ -1,0 +1,64 @@
+services:
+  # FAST-API
+  python-app:
+    container_name: srv-api-fast
+    build:
+      context: ./api-fast
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db-mongo
+    environment:
+      - MONGO_URI=mongodb://root:admin@db-mongo:27017
+    networks:
+      - back-tier
+
+  # MONGO-DB
+  db-mongo:
+    image: mongo:latest
+    container_name: db-mongo
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    networks:
+      - back-tier
+    ports:
+      - "27017:27017"
+
+  # REDIS
+  ch-redis:
+    container_name: ch-redis
+    image: redis:latest
+    volumes:
+      - redis-data:/data
+    networks:
+      - back-tier
+    ports:
+      - "6379:6379"
+
+
+  # WORKER
+  worker-load:
+    container_name: srv-worker
+    build:
+      context: ./worker
+    networks:
+      - back-tier
+    environment:
+      - REDIS_HOST=ch-redis
+      - REDIS_PORT=6379
+      - MONGODB_URI=mongodb://root:admin@db-mongo:27017/test?authSource=admin
+    depends_on:
+      - ch-redis
+      - db-mongo
+    ports:
+      - "8081:80"
+
+networks:
+  back-tier:
+
+volumes:
+  mongo-data:
+  redis-data:
