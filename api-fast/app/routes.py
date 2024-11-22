@@ -24,7 +24,8 @@ pkl_categories = cargar_modelo(abs_url(BASE_DIR, "./models/categorias.pkl"))
 @routes.post("/", status_code=status.HTTP_200_OK)
 async def my_route(
     archivo: UploadFile = File(...), 
-    correoEstudiante: str = "example@example.com", proyectoId: str = "example123",
+    correoEstudiante: str = "example@example.com", 
+    proyectoId: str = "example123",
     estudianteId: str = "example123", 
     nombreEntregable: str = "example"
     # proyectoId: str = "project123"

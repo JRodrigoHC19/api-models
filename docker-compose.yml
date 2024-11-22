@@ -7,7 +7,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://root:admin@34.227.7.159:27017
+      - MONGO_URI=mongodb://root:admin@44.203.113.190:27017
     networks:
       - back-tier
 
@@ -19,12 +19,9 @@ services:
     networks:
       - back-tier
     environment:
-    #   - REDIS_HOST=ch-redis
-    #   - REDIS_PORT=6379
-    #   - MONGODB_URI=mongodb://root:admin@db-mongo:27017/test?authSource=admin
-      - REDIS_HOST=34.227.7.159
+      - REDIS_HOST=44.203.113.190
       - REDIS_PORT=6379
-      - MONGODB_URI=mongodb://root:admin@34.227.7.159:27017/tecsup?authSource=admin
+      - MONGODB_URI=mongodb://root:admin@44.203.113.190/tecsup?authSource=admin
       - API_ENDPOINT=http://18.213.161.229:5000/api/recommendations/from-url
       - DIRECCION=http://34.227.7.159:4000
     ports:
