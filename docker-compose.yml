@@ -9,35 +9,9 @@ services:
     depends_on:
       - db-mongo
     environment:
-      - MONGO_URI=mongodb://root:admin@db-mongo:27017
+      - MONGO_URI=mongodb://root:admin@34.227.7.159:27017
     networks:
       - back-tier
-
-  # MONGO-DB
-  db-mongo:
-    image: mongo:latest
-    container_name: db-mongo
-    volumes:
-      - mongo-data:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=admin
-    networks:
-      - back-tier
-    ports:
-      - "27017:27017"
-
-  # REDIS
-  ch-redis:
-    container_name: ch-redis
-    image: redis:latest
-    volumes:
-      - redis-data:/data
-    networks:
-      - back-tier
-    ports:
-      - "6379:6379"
-
 
   # WORKER
   worker-load:
@@ -46,13 +20,10 @@ services:
       context: ./worker
     networks:
       - back-tier
-    environment:
-      - REDIS_HOST=ch-redis
-      - REDIS_PORT=6379
-      - MONGODB_URI=mongodb://root:admin@db-mongo:27017/test?authSource=admin
-    depends_on:
-      - ch-redis
-      - db-mongo
+    # environment:
+    #   - REDIS_HOST=ch-redis
+    #   - REDIS_PORT=6379
+    #   - MONGODB_URI=mongodb://root:admin@db-mongo:27017/test?authSource=admin
     ports:
       - "8081:80"
 
