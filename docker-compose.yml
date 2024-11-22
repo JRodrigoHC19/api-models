@@ -1,6 +1,6 @@
 services:
   # FAST-API
-  python-app:
+  srv-api-fast:
     container_name: srv-api-fast
     build:
       context: ./api-fast
@@ -22,10 +22,10 @@ services:
       - REDIS_HOST=44.203.113.190
       - REDIS_PORT=6379
       - MONGODB_URI=mongodb://root:admin@44.203.113.190/tecsup?authSource=admin
-      - API_ENDPOINT=http://18.213.161.229:5000/api/recommendations/from-url
+      - API_ENDPOINT=http://srv-api-fast:5000/api/recommendations/from-url
       - DIRECCION=http://34.227.7.159:4000
-    ports:
-      - "8081:80"
+    # ports:
+    #   - "8081:80"
 
 networks:
   back-tier:
