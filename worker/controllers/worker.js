@@ -33,7 +33,7 @@ const processQueue = async () => {
                 const parsedData = JSON.parse(taskData);
                 
                 // Imprimir la URL del documento
-                console.log(Procesando entregable para archivoUrl: ${parsedData.archivoPath});
+                console.log(`Procesando entregable para archivoUrl: ${parsedData.archivoPath}`);
 
                 // Guardar el entregable en la base de datos MongoDB
                 const nuevoEntregable = new Entregable({
@@ -49,11 +49,11 @@ const processQueue = async () => {
                 console.log('Entregable guardado en la base de datos:', nuevoEntregable);
                 try {
                     // Construir la URL completa del PDF
-                    const pdfUrl = ${process.env.DIRECCION}${parsedData.archivoPath};
+                    const pdfUrl = `${process.env.DIRECCION}${parsedData.archivoPath}`;
                     console.log("URL del archivo PDF:", pdfUrl);
                 
                     // Construir la URL con los parámetros
-                    const apiUrl = ${process.env.API_ENDPOINT}?pdf_url=${encodeURIComponent(pdfUrl)}&usuario_id=example123&nombre=example&email=example@example.com;
+                    const apiUrl = `${process.env.API_ENDPOINT}?pdf_url=${encodeURIComponent(pdfUrl)}&usuario_id=example123&nombre=example&email=example@example.com`;
                     console.log("URL del archivo PDF:", apiUrl);
                     // Enviar la solicitud GET con los parámetros en la URL
                     const apiResponse = await axios.post(apiUrl);
